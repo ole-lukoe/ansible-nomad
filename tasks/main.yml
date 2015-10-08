@@ -1,0 +1,88 @@
+---
+# tasks for nomad
+- name: nomad user
+  user: name=nomad
+  tags:
+  - nomad
+  - nomad.user
+
+- name: nomad group
+  group: name=nomad
+  tags:
+  - nomad
+  - nomad.group
+
+- name: download nomad binary
+  get_url: url=https://dl.bintray.com/mitchellh/nomad/nomad_{{ version }}_linux_amd64.zip
+  args:
+    force: true
+    dest: /tmp
+    mode: 0644
+    sha256sum: "{{ sha256sum }}"
+  tags:
+  - nomad
+  - nomad.download
+
+- name: unzip
+  yum: name=unzip
+  tags:
+  - nomad
+  - nomad.yum
+
+- name: unarchive
+  unarchive: src={{ tmp_dir }}/nomad_{{ version }}_linux_amd64.zip dest={{ install_dir }} copy=no
+  tags:
+  - nomad
+  - nomad.unarchive
+
+- name: make it executable
+  file: path={{ install_dir }}/nomad owner=nomad group=nomad mode=0755 state=file
+  tags:
+  - nomad
+  - nomad.chmod
+
+- name: make directories
+  file: path={{ item }} owner=nomad group=nomad mode=0755 state=directory
+  with_items:
+    - "{{ config_dir }}"
+    - "{{ data_dir }}"
+  tags:
+  - nomad
+  - nomad.dirs
+
+- name: init-script
+  copy: src=./init-script dest=/etc/init.d/nomad owner=nomad group=nomad mode=0755
+  when: ansible_distribution_major_version in ["6"]
+  tags:
+  - nomad
+  - nomad.init-script
+
+- name: sysconfig file
+  template: src=./sysconfig dest=/etc/sysconfig/nomad owner=nomad group=nomad mode=0644
+  when: ansible_distribution_major_version in ["6", "7"]
+  tags:
+  - nomad
+  - nomad.conf
+
+- name: nomad.service file
+  copy: src=./nomad.service dest=/etc/systemd/system/nomad.service owner=nomad group=nomad mode=0644
+  when: ansible_distribution_major_version in ["7"]
+  notify:
+  - daemon-reload
+  tags:
+  - nomad
+  - nomad.conf
+
+- name: config file
+  template: src=./server.hcl dest={{ config_dir }}/server.hcl owner=nomad group=nomad mode=0644
+  notify:
+  - restart nomad
+  tags:
+  - nomad
+  - nomad.conf
+
+- name: service
+  service: name=nomad state=started enabled=yes
+  tags:
+  - nomad
+  - nomad.service

@@ -1,0 +1,5 @@
+.e
+.vagrant
+.*.swp
+tmtk75.consul
+ssh-config

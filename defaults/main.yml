@@ -1,0 +1,18 @@
+---
+# default vars for nomad
+version: 0.1.0
+sha256sum: 0c41b5b804089e3f776998fb6e03815e9862580ca953dd39ee822d71fde51e70
+install_dir: /usr/local/sbin
+config_dir: /etc/nomad.d
+data_dir: /var/lib/nomad
+tmp_dir: /tmp
+
+#
+region: "{{ facter_ec2_placement_availability_zone[:-1] }}"
+datacenter: "dev"
+name: "{{ facter_ec2_instance_id }}"
+
+# /etc/sysconfig/nomad
+gomaxprocs: 2
+options: ""
+

@@ -1,0 +1,7 @@
+---
+# handlers for nomad
+- name: daemon-reload
+  action: command /usr/bin/systemctl daemon-reload
+
+- name: restart nomad
+  action: command /usr/bin/systemctl reload nomad
