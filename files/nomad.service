@@ -5,7 +5,7 @@ After=network-online.target
 
 [Service]
 Type=simple
-User=nomad
+User=root
 EnvironmentFile=-/etc/sysconfig/nomad
 Restart=on-failure
 ExecStart=/usr/local/sbin/nomad agent $OPTIONS -config=/etc/nomad.d/server.hcl
