@@ -33,6 +33,10 @@ server {
   # Self-elect, should be 3 or 5 for production
   bootstrap_expect = 3
 }
+client {
+  enabled = true
+  servers = ["127.0.0.1:4647"]
+}
 {% else %}
 client {
   enabled = true
