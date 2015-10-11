@@ -80,6 +80,7 @@
   tags:
   - nomad
   - nomad.conf
+  - nomad.conf.hcl
 
 - name: service
   service: name=nomad state=started enabled=yes
