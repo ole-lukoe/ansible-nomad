@@ -13,7 +13,7 @@
   - nomad.group
 
 - name: download nomad binary
-  get_url: url=https://dl.bintray.com/mitchellh/nomad/nomad_{{ version }}_linux_amd64.zip
+  get_url: url=https://releases.hashicorp.com/nomad/{{ version }}/nomad_{{ version }}_linux_amd64.zip
   args:
     force: true
     dest: /tmp

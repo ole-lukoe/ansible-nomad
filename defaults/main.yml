@@ -3,8 +3,8 @@
 #
 # http://docs.ansible.com/ansible/playbooks_variables.html
 #
-version: 0.1.2
-sha256sum: 3335f7acb0d5eacaaa19aea37d128418ace18e6ef03d38de0c2c52ce831d7934
+version: 0.4.0
+sha256sum: c0479dcc03d35c1b0f6e7be256732431384bec16901a124dd97b2a60d465fb91
 install_dir: /usr/local/sbin
 config_dir: /etc/nomad.d
 data_dir: /var/lib/nomad
