@@ -1,9 +1,0 @@
-- hosts: all
-  sudo: true
-  roles:
-    #- { role: tmtk75.nomad, server: false, bootstrap_expect: 2 }
-    - { role: nomad-template }
-  vars:
-  - templates:
-    - { src: "a", dest: "b", command: "c" }
-    - { src: "A", dest: "B", command: "C" }
