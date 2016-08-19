@@ -13,12 +13,12 @@
   - nomad.group
 
 - name: download nomad binary
-  get_url: url=https://releases.hashicorp.com/nomad/{{ version }}/nomad_{{ version }}_linux_amd64.zip
+  get_url: url=https://releases.hashicorp.com/nomad/{{ nomad_version }}/nomad_{{ nomad_version }}_linux_amd64.zip
   args:
     force: true
     dest: /tmp
     mode: 0644
-    sha256sum: "{{ sha256sum }}"
+    sha256sum: "{{ nomad_sha256sum }}"
   tags:
   - nomad
   - nomad.download
@@ -30,13 +30,13 @@
   - nomad.yum
 
 - name: unarchive
-  unarchive: src={{ tmp_dir }}/nomad_{{ version }}_linux_amd64.zip dest={{ install_dir }} copy=no
+  unarchive: src={{ nomad_tmp_dir }}/nomad_{{ nomad_version }}_linux_amd64.zip dest={{ nomad_install_dir }} copy=no
   tags:
   - nomad
   - nomad.unarchive
 
 - name: make it executable
-  file: path={{ install_dir }}/nomad owner=nomad group=nomad mode=0755 state=file
+  file: path={{ nomad_install_dir }}/nomad owner=nomad group=nomad mode=0755 state=file
   tags:
   - nomad
   - nomad.chmod
@@ -44,8 +44,8 @@
 - name: make directories
   file: path={{ item }} owner=nomad group=nomad mode=0755 state=directory
   with_items:
-    - "{{ config_dir }}"
-    - "{{ data_dir }}"
+    - "{{ nomad_config_dir }}"
+    - "{{ nomad_data_dir }}"
   tags:
   - nomad
   - nomad.dirs
@@ -74,7 +74,7 @@
   - nomad.conf
 
 - name: config file
-  template: src=./server.hcl dest={{ config_dir }}/server.hcl owner=nomad group=nomad mode=0644
+  template: src=./server.hcl dest={{ nomad_config_dir }}/server.hcl owner=nomad group=nomad mode=0644
   notify:
   - restart nomad
   tags:

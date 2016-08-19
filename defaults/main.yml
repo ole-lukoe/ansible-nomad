@@ -3,28 +3,28 @@
 #
 # http://docs.ansible.com/ansible/playbooks_variables.html
 #
-version: 0.4.0
-sha256sum: c0479dcc03d35c1b0f6e7be256732431384bec16901a124dd97b2a60d465fb91
-install_dir: /usr/local/sbin
-config_dir: /etc/nomad.d
-data_dir: /var/lib/nomad
-tmp_dir: /tmp
+nomad_version: 0.4.1
+nomad_sha256sum: 0cdb5dd95c918c6237dddeafe2e9d2049558fea79ed43eacdfcd247d5b093d67
+nomad_install_dir: /usr/local/sbin
+nomad_config_dir: /etc/nomad.d
+nomad_data_dir: /var/lib/nomad
+nomad_tmp_dir: /tmp
 
 #
-region: "{{ facter_ec2_placement_availability_zone[:-1] }}"
-datacenter: "dev"
-name: "{{ facter_ec2_instance_id }}"
+nomad_region: "{{ facter_ec2_placement_availability_zone[:-1] }}"  ## chop last char
+nomad_datacenter: "dc1"
+nomad_name: "{{ facter_ec2_instance_id }}"
 #local_ipaddress: "{{ facter_ec2_local_ipv4 }}"
-private_ipaddress: "{{ ansible_default_ipv4['address'] }}"
-local_ipaddress: "127.0.0.1"
-bind_addr: "0.0.0.0"
-port_http: 4646
-port_rpc:  4647
-port_serf: 4648
-server_enabled: false
-servers: []
+nomad_private_ipaddress: "{{ ansible_default_ipv4['address'] }}"
+nomad_local_ipaddress: "127.0.0.1"
+nomad_bind_addr: "0.0.0.0"
+nomad_port_http: 4646
+nomad_port_rpc:  4647
+nomad_port_serf: 4648
+nomad_server_enabled: false
+nomad_bootstrap_expect: 3
 
 # /etc/sysconfig/nomad
-gomaxprocs: 2
-options: ""
+nomad_gomaxprocs: 2
+nomad_options: ""
 

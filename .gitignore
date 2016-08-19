@@ -1,1 +1,4 @@
 .*.swp
+roles
+.vagrant
+ssh-config

@@ -1,0 +1,18 @@
+- hosts: all
+
+  gather_facts: true
+
+  become: true
+
+  vars:
+  - facter_ec2_placement_availability_zone: "ap-northeast-1a"
+  - facter_ec2_instance_id: i-abcd1234
+  - nomad_server_enabled: true
+  - nomad_bootstrap_expect: 1
+
+  roles:
+  - nomad
+
+  tasks:
+
+  handlers:

@@ -1,2 +1,2 @@
-GOMAXPROCS={{ gomaxprocs }}
-OPTIONS="{{ options }}"
+GOMAXPROCS={{ nomad_gomaxprocs }}
+OPTIONS="{{ nomad_options }}"
