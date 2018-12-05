@@ -3,7 +3,7 @@
 # nomad        Manage the nomad agent
 #       
 # chkconfig:   2345 95 95
-# description: Consul is a tool for service discovery and configuration
+# description: Nomad is a flexible container orchestration tool
 # processname: nomad
 # config: /etc/nomad.conf
 # pidfile: /var/run/nomad.pid
@@ -17,7 +17,7 @@
 # Default-Start: 2 3 4 5
 # Default-Stop:  0 1 6
 # Short-Description: Manage the nomad agent
-# Description: Consul is a tool for service discovery and configuration
+# Description: Nomad is a flexible container orchestration tool
 ### END INIT INFO
 
 # source function library
